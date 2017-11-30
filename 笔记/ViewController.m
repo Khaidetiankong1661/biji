@@ -38,6 +38,14 @@
     
     self.tipLabel.hidden = YES;
 
+    
+    
+    
+    
+    
+    
+
+    ////
     if (self.arr.count <= 0) {
         self.tipLabel.hidden = NO;
     }
