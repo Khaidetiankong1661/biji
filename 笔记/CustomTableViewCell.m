@@ -8,7 +8,29 @@
 
 #import "CustomTableViewCell.h"
 
+@interface CustomTableViewCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UILabel *time;
+
+@end
+
 @implementation CustomTableViewCell
+
++ (instancetype)customTableViewCellWithTableView:(UITableView *)tableView
+{
+    static NSString *identi = @"identi";
+    CustomTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identi];
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"CustomTableViewCell" owner:nil options:nil] lastObject];
+    }
+    return cell;
+}
+
+- (void)setDataWithArr:(NSString *)str
+{
+    self.label.text = str;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

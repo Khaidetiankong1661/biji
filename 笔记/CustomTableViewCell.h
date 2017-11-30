@@ -10,4 +10,8 @@
 
 @interface CustomTableViewCell : UITableViewCell
 
++ (instancetype)customTableViewCellWithTableView:(UITableView *)tableView;
+
+- (void)setDataWithArr:(NSString *)str;
+
 @end

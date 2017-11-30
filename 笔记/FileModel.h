@@ -9,5 +9,19 @@
 #import <Foundation/Foundation.h>
 
 @interface FileModel : NSObject
+/**
+ 写入内存
+
+ @param arr 存入的数据
+ */
++ (void)writeArrWithArr:(NSArray *)arr;
+
+/**
+ 从内存中取出数据
+
+ @return 存入的数据
+ */
++ (NSArray *)returnArr;
+
 
 @end

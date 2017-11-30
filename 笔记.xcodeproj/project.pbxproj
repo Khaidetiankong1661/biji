@@ -15,6 +15,10 @@
 		7BE08C7D1FCEA368001CD15E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BE08C7B1FCEA368001CD15E /* LaunchScreen.storyboard */; };
 		7BE08C881FCEA368001CD15E /* __Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE08C871FCEA368001CD15E /* __Tests.m */; };
 		7BE08C931FCEA368001CD15E /* __UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE08C921FCEA368001CD15E /* __UITests.m */; };
+		7BE08CA51FCEA56E001CD15E /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE08CA31FCEA56E001CD15E /* CustomTableViewCell.m */; };
+		7BE08CA61FCEA56E001CD15E /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BE08CA41FCEA56E001CD15E /* CustomTableViewCell.xib */; };
+		7BE08CA91FCEAE9D001CD15E /* FileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE08CA81FCEAE9D001CD15E /* FileModel.m */; };
+		7BE08CAD1FCEB1A9001CD15E /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE08CAC1FCEB1A9001CD15E /* EditViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,13 @@
 		7BE08C8E1FCEA368001CD15E /* 笔记UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "笔记UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE08C921FCEA368001CD15E /* __UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = __UITests.m; sourceTree = "<group>"; };
 		7BE08C941FCEA368001CD15E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BE08CA21FCEA56E001CD15E /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		7BE08CA31FCEA56E001CD15E /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		7BE08CA41FCEA56E001CD15E /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
+		7BE08CA71FCEAE9D001CD15E /* FileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileModel.h; sourceTree = "<group>"; };
+		7BE08CA81FCEAE9D001CD15E /* FileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileModel.m; sourceTree = "<group>"; };
+		7BE08CAB1FCEB1A9001CD15E /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		7BE08CAC1FCEB1A9001CD15E /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +114,7 @@
 			children = (
 				7BE08C701FCEA368001CD15E /* AppDelegate.h */,
 				7BE08C711FCEA368001CD15E /* AppDelegate.m */,
-				7BE08C731FCEA368001CD15E /* ViewController.h */,
-				7BE08C741FCEA368001CD15E /* ViewController.m */,
+				7BE08CA01FCEA525001CD15E /* VC */,
 				7BE08C761FCEA368001CD15E /* Main.storyboard */,
 				7BE08C791FCEA368001CD15E /* Assets.xcassets */,
 				7BE08C7B1FCEA368001CD15E /* LaunchScreen.storyboard */,
@@ -138,6 +148,38 @@
 				7BE08C941FCEA368001CD15E /* Info.plist */,
 			);
 			path = "笔记UITests";
+			sourceTree = "<group>";
+		};
+		7BE08CA01FCEA525001CD15E /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				7BE08C731FCEA368001CD15E /* ViewController.h */,
+				7BE08C741FCEA368001CD15E /* ViewController.m */,
+				7BE08CAB1FCEB1A9001CD15E /* EditViewController.h */,
+				7BE08CAC1FCEB1A9001CD15E /* EditViewController.m */,
+				7BE08CA11FCEA54E001CD15E /* View */,
+				7BE08CAA1FCEB185001CD15E /* Model */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		7BE08CA11FCEA54E001CD15E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7BE08CA21FCEA56E001CD15E /* CustomTableViewCell.h */,
+				7BE08CA31FCEA56E001CD15E /* CustomTableViewCell.m */,
+				7BE08CA41FCEA56E001CD15E /* CustomTableViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		7BE08CAA1FCEB185001CD15E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7BE08CA71FCEAE9D001CD15E /* FileModel.h */,
+				7BE08CA81FCEAE9D001CD15E /* FileModel.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +293,7 @@
 			files = (
 				7BE08C7D1FCEA368001CD15E /* LaunchScreen.storyboard in Resources */,
 				7BE08C7A1FCEA368001CD15E /* Assets.xcassets in Resources */,
+				7BE08CA61FCEA56E001CD15E /* CustomTableViewCell.xib in Resources */,
 				7BE08C781FCEA368001CD15E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,7 +320,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BE08C751FCEA368001CD15E /* ViewController.m in Sources */,
+				7BE08CA91FCEAE9D001CD15E /* FileModel.m in Sources */,
 				7BE08C721FCEA368001CD15E /* AppDelegate.m in Sources */,
+				7BE08CA51FCEA56E001CD15E /* CustomTableViewCell.m in Sources */,
+				7BE08CAD1FCEB1A9001CD15E /* EditViewController.m in Sources */,
 				7BE08C6F1FCEA368001CD15E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

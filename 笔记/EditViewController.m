@@ -7,16 +7,42 @@
 //
 
 #import "EditViewController.h"
+#import "FileModel.h"
 
-@interface EditViewController ()
+@interface EditViewController ()<UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end
 
 @implementation EditViewController
 
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+}
+
+- (IBAction)doneAction:(UIBarButtonItem *)sender
+{
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:[FileModel returnArr]];
+    [arr insertObject:self.textView.text atIndex:0];
+    [FileModel writeArrWithArr:arr];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+- (IBAction)canCelAction:(UIBarButtonItem *)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+
+    
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
