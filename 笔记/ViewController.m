@@ -40,12 +40,6 @@
 
     
     
-    
-    
-    
-    
-
-    ////
     if (self.arr.count <= 0) {
         self.tipLabel.hidden = NO;
     }
@@ -63,8 +57,8 @@
     CustomTableViewCell *cell = [CustomTableViewCell customTableViewCellWithTableView:tableView];
     
     if (self.arr.count > 0) {
-        NSString *arr = self.arr[indexPath.row];
-        [cell setDataWithArr:arr];
+        NSDictionary *dic = self.arr[indexPath.row];
+        [cell setDataWithDic:dic];
     }
     return cell;
 }
@@ -92,9 +86,6 @@
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你确定删除该消息？" preferredStyle:UIAlertControllerStyleAlert];
 
-        
-    
-        
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {

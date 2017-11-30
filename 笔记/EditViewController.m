@@ -27,12 +27,28 @@
 - (IBAction)doneAction:(UIBarButtonItem *)sender
 {
     NSMutableArray *arr = [NSMutableArray arrayWithArray:[FileModel returnArr]];
-    [arr insertObject:self.textView.text atIndex:0];
-    [FileModel writeArrWithArr:arr];
     
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"str"] = self.textView.text;
+    
+    dic[@"time"] = [self strWithDate];
+    [arr insertObject:dic atIndex:0];
+    
+    [FileModel writeArrWithArr:arr];
     [self.navigationController popViewControllerAnimated:YES];
 
 }
+
+- (NSString *)strWithDate
+{
+    NSDate *date = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd  HH:mm"];
+    NSString *strfor = [formatter stringFromDate:date];
+    return strfor;
+}
+
 - (IBAction)canCelAction:(UIBarButtonItem *)sender
 {
     [self.navigationController popViewControllerAnimated:YES];

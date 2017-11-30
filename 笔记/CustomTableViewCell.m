@@ -27,9 +27,12 @@
     return cell;
 }
 
-- (void)setDataWithArr:(NSString *)str
+- (void)setDataWithDic:(NSDictionary *)dic
 {
-    self.label.text = str;
+    if ([dic isKindOfClass:[NSDictionary class]]) {
+        self.label.text = dic[@"str"];
+        self.time.text = dic[@"time"];
+    }
 }
 
 - (void)awakeFromNib {

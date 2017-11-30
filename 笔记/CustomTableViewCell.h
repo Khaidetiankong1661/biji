@@ -12,6 +12,6 @@
 
 + (instancetype)customTableViewCellWithTableView:(UITableView *)tableView;
 
-- (void)setDataWithArr:(NSString *)str;
+- (void)setDataWithDic:(NSDictionary *)dic;
 
 @end
