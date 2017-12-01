@@ -89,6 +89,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B49EF661FD0F3B800E9AE59 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
 		7BE08C611FCEA368001CD15E = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +122,7 @@
 				7BE08C701FCEA368001CD15E /* AppDelegate.h */,
 				7BE08C711FCEA368001CD15E /* AppDelegate.m */,
 				7BE08CA01FCEA525001CD15E /* VC */,
+				7B49EF661FD0F3B800E9AE59 /* Tool */,
 				7BE08C761FCEA368001CD15E /* Main.storyboard */,
 				7BE08C791FCEA368001CD15E /* Assets.xcassets */,
 				7BE08C7B1FCEA368001CD15E /* LaunchScreen.storyboard */,
@@ -273,6 +281,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 7BE08C611FCEA368001CD15E;
 			productRefGroup = 7BE08C6B1FCEA368001CD15E /* Products */;
@@ -562,6 +571,7 @@
 				7BE08C991FCEA368001CD15E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7BE08C9A1FCEA368001CD15E /* Build configuration list for PBXNativeTarget "笔记Tests" */ = {
 			isa = XCConfigurationList;
@@ -570,6 +580,7 @@
 				7BE08C9C1FCEA368001CD15E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7BE08C9D1FCEA368001CD15E /* Build configuration list for PBXNativeTarget "笔记UITests" */ = {
 			isa = XCConfigurationList;
@@ -578,6 +589,7 @@
 				7BE08C9F1FCEA368001CD15E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

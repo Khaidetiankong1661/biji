@@ -32,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENa-Hd-KVR">
-                        <rect key="frame" x="275" y="46.5" width="40" height="16"/>
+                        <rect key="frame" x="272" y="46.5" width="40" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.1764705882" green="0.25490196079999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                     <constraint firstAttribute="bottom" secondItem="1em-t0-PSO" secondAttribute="bottom" id="OXd-V0-hd2"/>
                     <constraint firstAttribute="trailing" secondItem="h0m-sE-oiO" secondAttribute="trailing" constant="15" id="RhT-cz-wdL"/>
                     <constraint firstItem="1em-t0-PSO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="adD-VU-CXc"/>
-                    <constraint firstAttribute="trailing" secondItem="ENa-Hd-KVR" secondAttribute="trailing" constant="5" id="iM2-79-q92"/>
+                    <constraint firstAttribute="trailing" secondItem="ENa-Hd-KVR" secondAttribute="trailing" constant="8" id="iM2-79-q92"/>
                     <constraint firstItem="h0m-sE-oiO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qYg-WU-Gjw"/>
                     <constraint firstAttribute="trailing" secondItem="1em-t0-PSO" secondAttribute="trailing" id="sln-5k-Pfy"/>
                     <constraint firstItem="1em-t0-PSO" firstAttribute="top" secondItem="ENa-Hd-KVR" secondAttribute="bottom" constant="2" id="zfn-rd-pXf"/>

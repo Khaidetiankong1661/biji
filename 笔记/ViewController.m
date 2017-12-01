@@ -8,6 +8,7 @@
 #import "ViewController.h"
 #import "CustomTableViewCell.h"
 #import "FileModel.h"
+#import "EditViewController.h"
 
 @interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -26,8 +27,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.arr = [NSMutableArray arrayWithArray:[FileModel returnArr]];
-    [self.tablview reloadData];
+//    self.arr = [NSMutableArray arrayWithArray:[FileModel returnArr]];
+//    [self.tablview reloadData];
 }
 
 - (void)viewDidLoad
@@ -44,6 +45,20 @@
         self.tipLabel.hidden = NO;
     }
     [self.tablview reloadData];
+}
+
+- (IBAction)editVC:(UIBarButtonItem *)sender
+{
+//    EditViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"EditViewController"];
+    EditViewController *vc = [[EditViewController alloc] init];
+
+    __weak typeof(self) weakSelf = self;
+    vc.doneBlock = ^(NSDictionary *dic) {
+        [weakSelf.arr insertObject:dic atIndex:0];
+        NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
+        [weakSelf.tablview insertRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationFade];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark- UITableViewDelegate and UITableViewDataSource

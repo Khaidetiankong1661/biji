@@ -66,7 +66,7 @@
                     <navigationItem key="navigationItem" id="Xde-9a-LNi">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="QuZ-nM-yOL">
                             <connections>
-                                <segue destination="GUD-6y-K1O" kind="push" id="Fjl-tZ-lKg"/>
+                                <action selector="editVC:" destination="BYZ-38-t0r" id="hOa-xe-NpT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -78,58 +78,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1322" y="-645"/>
-        </scene>
-        <!--Edit View Controller-->
-        <scene sceneID="ecy-DE-bin">
-            <objects>
-                <viewController id="GUD-6y-K1O" customClass="EditViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ABR-tf-CYm"/>
-                        <viewControllerLayoutGuide type="bottom" id="9aa-0H-moN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HHO-jZ-6sI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="d8h-Rh-Fcf">
-                                <rect key="frame" x="0.0" y="74" width="375" height="593"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="GUD-6y-K1O" id="H1X-Eb-b7u"/>
-                                </connections>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="d8h-Rh-Fcf" firstAttribute="top" secondItem="ABR-tf-CYm" secondAttribute="bottom" constant="10" id="QWG-Hy-6wD"/>
-                            <constraint firstAttribute="trailing" secondItem="d8h-Rh-Fcf" secondAttribute="trailing" id="U83-lG-UXO"/>
-                            <constraint firstItem="9aa-0H-moN" firstAttribute="top" secondItem="d8h-Rh-Fcf" secondAttribute="bottom" id="YCw-L4-hgd"/>
-                            <constraint firstItem="d8h-Rh-Fcf" firstAttribute="leading" secondItem="HHO-jZ-6sI" secondAttribute="leading" id="xr1-tN-0xL"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="WYs-dJ-5Jp">
-                        <barButtonItem key="leftBarButtonItem" title="取消" id="HbF-k8-viH">
-                            <color key="tintColor" red="1" green="0.63137254899999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="canCelAction:" destination="GUD-6y-K1O" id="mXn-O3-WPR"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" style="plain" id="Hwx-cx-4F5">
-                            <color key="tintColor" red="1" green="0.63137254899999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="doneAction:" destination="GUD-6y-K1O" id="MSn-nc-OhI"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="textView" destination="d8h-Rh-Fcf" id="apN-4e-Cs2"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yX7-eo-f5r" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2183" y="-645"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Z8b-aT-1Kn">
