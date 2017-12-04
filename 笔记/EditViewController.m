@@ -11,6 +11,7 @@
 
 #import "EditViewController.h"
 #import "FileModel.h"
+#import <UserNotifications/UserNotifications.h>
 
 @interface EditViewController ()<UITextViewDelegate>
 {
@@ -192,6 +193,7 @@
     } else {
         time = [self strWithDate];
     }
+     
     dic[@"time"] = time;
     [arr insertObject:dic atIndex:0];
     
@@ -231,6 +233,25 @@
     dateForm.dateFormat = @"yyy-MM-dd  HH:mm";
     //由当前获取的NSDate数据，转换为日期字符串，显示在私有成员变量_textField上
     labe.text = [dateForm stringFromDate:date];
+    // 添加通知
+    [self addNotifacion];
+}
+
+- (void)addNotifacion
+{
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+    content.title = @"记录事项通知";
+    content.body = self.texttView.text;
+    content.badge = @1;
+    
+    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:10 repeats:NO];
+    
+    NSString *requertIdentifier = @"RequestIdentifier";
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requertIdentifier content:content trigger:trigger];
+ 
+    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        NSLog(@"Error:%@",error);
+    }];
 }
 
 /**
