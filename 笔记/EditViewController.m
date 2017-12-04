@@ -27,6 +27,8 @@
 
 @property (strong, nonatomic) UITextView *textView;
 
+@property (strong, nonatomic) UISwitch *switchBu;
+
 @property (nonatomic, strong) UIDatePicker *datePicker;
 
 @end
@@ -38,6 +40,7 @@
 {
     [super viewDidLoad];
     
+    [self addSwitchNotifacation];
     [self addTextView];
     [self addBackView];
     [self addItemAction];
@@ -158,13 +161,33 @@
 
 - (void)addTextView
 {
-    UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, 65, KW, KH - 65)];
+    UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.switchBu.frame), KW, KH - 65)];
     view.delegate = self;
     
     self.textView = view;
     
     [self.view addSubview:view];
 }
+// 是否加入通知提醒
+- (void)addSwitchNotifacation
+{
+    UISwitch *switchB = [[UISwitch alloc] initWithFrame:CGRectMake(KW - 50, 60, 100, 40)];
+//    [switchB addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
+    switchB.on = NO;
+    self.switchBu = switchB;
+    [self.view addSubview:switchB];
+}
+//- (void)switchAction:(id)sender
+//{
+//    UISwitch *switchButton = (UISwitch*)sender;
+//    BOOL isButtonOn = [switchButton isOn];
+//    if (isButtonOn) {
+//
+//    
+//    } else {
+//        NSLog(@"关");
+//    }
+//}
 
 - (void)addItemAction
 {
@@ -191,6 +214,15 @@
         // 创建进入
         [self creatDo];
     }
+    
+    if (![self.switchBu isOn]) return;
+    
+    NSString *formateStr = @"yyy-MM-dd  HH:mm";
+    NSInteger timeSp =  [self timeSwitchTimestamp:labe.text andFormatter:formateStr];
+    if (timeSp <= 0) return;
+    
+    // 加入消息提醒
+    [self addNotifacionWithDate:labe.text formater:formateStr time:timeSp];
 }
 
 - (void) editDo
@@ -268,21 +300,24 @@
     NSDate *date =_datePicker.date;
     NSDateFormatter *dateForm = [[NSDateFormatter alloc] init];
     //设定转换格式
-    dateForm.dateFormat = @"yyy-MM-dd  HH:mm";
+    NSString *formateStr = @"yyy-MM-dd  HH:mm";
+    dateForm.dateFormat = formateStr;
     //由当前获取的NSDate数据，转换为日期字符串，显示在私有成员变量_textField上
     labe.text = [dateForm stringFromDate:date];
-    // 添加通知
-    [self addNotifacion];
 }
 
-- (void)addNotifacion
+- (void)addNotifacionWithDate:(NSString *)dateStr formater:(NSString *)formatestr time:(NSInteger)timeSp
 {
     UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
     content.title = @"记录事项通知";
     content.body = self.textView.text;
-    content.badge = @1;
+    content.badge  = @1;
+  NSInteger bag =  [[UIApplication sharedApplication] applicationIconBadgeNumber];
+    bag += 1;
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:bag];
     
-    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:10 repeats:NO];
+    UNTimeIntervalNotificationTrigger *trigger;
+        trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:timeSp repeats:NO];
     
     NSString *requertIdentifier = @"RequestIdentifier";
     UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requertIdentifier content:content trigger:trigger];
@@ -290,6 +325,37 @@
     [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
         NSLog(@"Error:%@",error);
     }];
+}
+
+- (NSInteger)timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format
+{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [formatter setDateFormat:format]; //(@"YYYY-MM-dd hh:mm:ss") ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    
+    [formatter setTimeZone:timeZone];
+    
+
+    NSDate* date = [formatter dateFromString:formatTime]; //------------将字符串按formatter转成nsdate
+    
+    //时间转时间戳的方法:
+    
+    NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue];
+    
+    NSDate *datenow = [NSDate date];//现在时间
+    NSInteger nowSp = [[NSNumber numberWithDouble:[datenow timeIntervalSince1970]] integerValue];
+    NSInteger tipSp = timeSp - nowSp;
+    if (timeSp > 0) {
+        return tipSp;
+    }
+    return -1;
 }
 
 - (void)makeData

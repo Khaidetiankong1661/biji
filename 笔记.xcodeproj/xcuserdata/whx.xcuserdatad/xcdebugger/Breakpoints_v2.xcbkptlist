@@ -4,18 +4,28 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "&#x7b14;&#x8bb0;/ViewController.m"
-            timestampString = "533825915.627042"
+            filePath = "&#x7b14;&#x8bb0;/EditViewController.m"
+            timestampString = "534096543.879363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "-editVC:"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "-rightAction"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
