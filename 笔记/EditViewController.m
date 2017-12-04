@@ -25,8 +25,7 @@
 
 }
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (strong, nonatomic) UITextView *texttView;
+@property (strong, nonatomic) UITextView *textView;
 
 @property (nonatomic, strong) UIDatePicker *datePicker;
 
@@ -42,7 +41,7 @@
     [self addTextView];
     [self addBackView];
     [self addItemAction];
-    
+    [self makeData];
     [self.textView becomeFirstResponder];
     [self addNotifacation];
 }
@@ -130,7 +129,6 @@
     [topView addSubview:btn];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    
     UIButton *cancel = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(topView.frame) - 60 - 5, 0, 60, CGRectGetHeight(topView.frame))];
     cancel.titleLabel.font = [UIFont systemFontOfSize:14.0f];
     [cancel setTitle:@"完成" forState:UIControlStateNormal];
@@ -163,7 +161,7 @@
     UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, 65, KW, KH - 65)];
     view.delegate = self;
     
-    self.texttView = view;
+    self.textView = view;
     
     [self.view addSubview:view];
 }
@@ -171,42 +169,82 @@
 - (void)addItemAction
 {
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
+    [right setTintColor:[UIColor orangeColor]];
     self.navigationItem.rightBarButtonItem = right;
     
     
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(leftAction)];
+    [left setTintColor:[UIColor orangeColor]];
     self.navigationItem.leftBarButtonItem = left;
     
 }
 
 #pragma mark - UIBarButtonItem 点击事件
 - (void)rightAction
-{
-    NSMutableArray *arr = [NSMutableArray arrayWithArray:[FileModel returnArr]];
-    
-    
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    dic[@"str"] = self.texttView.text;
-    NSString *time;
-    if (labe.text.length > 0) {
-        time = labe.text;
-    } else {
-        time = [self strWithDate];
+{    
+    if (self.dataDic) {
+        // 编辑行进入
+        [self editDo];
     }
-     
-    dic[@"time"] = time;
-    [arr insertObject:dic atIndex:0];
-    
-    [FileModel writeArrWithArr:arr];
-    
     
     if (self.doneBlock) {
-        self.doneBlock(dic);
+        // 创建进入
+        [self creatDo];
     }
+}
+
+- (void) editDo
+{
+    if (self.textView.text.length > 0) {
+        NSMutableArray *arr = [NSMutableArray arrayWithArray:[FileModel returnArr]];
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        dic[@"str"] = self.textView.text;
+        NSString *time;
+        if (labe.text.length > 0) {
+            time = labe.text;
+        } else {
+            time = [self strWithDate];
+        }
+        dic[@"time"] = time;
+        [arr removeObjectAtIndex:self.selectNum];
+        [arr insertObject:dic atIndex:0];
+        
+        [FileModel writeArrWithArr:arr];
+        
+        if (self.editDoneBlock) {
+            self.editDoneBlock(dic, self.selectNum);
+        }
+    };
     
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)creatDo
+{
+    if (self.textView.text.length > 0) {
+        NSMutableArray *arr = [NSMutableArray arrayWithArray: [FileModel returnArr]];
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        dic[@"str"] = self.textView.text;
+        NSString *time;
+        if (labe.text.length > 0) {
+            time = labe.text;
+        } else {
+            time = [self strWithDate];
+        }
+        dic[@"time"] = time;
+        [arr insertObject:dic atIndex:0];
+        
+        [FileModel writeArrWithArr:arr];
+        
+        if (self.doneBlock) {
+            self.doneBlock(dic);
+        }
+    };
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)leftAction
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -241,7 +279,7 @@
 {
     UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
     content.title = @"记录事项通知";
-    content.body = self.texttView.text;
+    content.body = self.textView.text;
     content.badge = @1;
     
     UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:10 repeats:NO];
@@ -252,6 +290,13 @@
     [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
         NSLog(@"Error:%@",error);
     }];
+}
+
+- (void)makeData
+{
+    if (!self.dataDic) return;
+    self.textView.text = self.dataDic[@"str"];
+    labe.text = self.dataDic[@"time"];
 }
 
 /**
@@ -274,7 +319,7 @@
         
     } else if ([but.titleLabel.text isEqualToString:@"键盘"]) {
         [but setTitle:@"时间" forState:UIControlStateNormal];
-        [self.texttView becomeFirstResponder];
+        [self.textView becomeFirstResponder];
     }
 }
 

@@ -29,12 +29,12 @@
 
 + (NSArray *)returnArr
 {
-    NSMutableArray *saveDataArray=nil;
+    NSMutableArray *saveDataArray = nil;
     NSString *str = [FileModel returnFile];
 
-    if([[NSFileManager defaultManager] fileExistsAtPath:str]){
+    if ([[NSFileManager defaultManager] fileExistsAtPath:str]) {
         saveDataArray = [NSMutableArray arrayWithContentsOfFile:str];
-    } else{
+    } else {
         saveDataArray = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Savedatas" ofType:@"plist"]];
     }
     return [NSArray arrayWithArray:saveDataArray];
