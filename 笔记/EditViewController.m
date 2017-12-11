@@ -27,8 +27,6 @@
 
 @property (strong, nonatomic) UITextView *textView;
 
-@property (strong, nonatomic) UISwitch *switchBu;
-
 @property (nonatomic, strong) UIDatePicker *datePicker;
 
 @end
@@ -40,7 +38,6 @@
 {
     [super viewDidLoad];
     
-    [self addSwitchNotifacation];
     [self addTextView];
     [self addBackView];
     [self addItemAction];
@@ -161,33 +158,14 @@
 
 - (void)addTextView
 {
-    UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.switchBu.frame), KW, KH - 65)];
+    UITextView *view = [[UITextView alloc] initWithFrame:CGRectMake(0, 64, KW, KH - 65)];
     view.delegate = self;
     
     self.textView = view;
     
     [self.view addSubview:view];
 }
-// 是否加入通知提醒
-- (void)addSwitchNotifacation
-{
-    UISwitch *switchB = [[UISwitch alloc] initWithFrame:CGRectMake(KW - 50, 60, 100, 40)];
-//    [switchB addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
-    switchB.on = NO;
-    self.switchBu = switchB;
-    [self.view addSubview:switchB];
-}
-//- (void)switchAction:(id)sender
-//{
-//    UISwitch *switchButton = (UISwitch*)sender;
-//    BOOL isButtonOn = [switchButton isOn];
-//    if (isButtonOn) {
-//
-//    
-//    } else {
-//        NSLog(@"关");
-//    }
-//}
+
 
 - (void)addItemAction
 {
@@ -205,40 +183,54 @@
 #pragma mark - UIBarButtonItem 点击事件
 - (void)rightAction
 {    
-    if (self.dataDic) {
-        // 编辑行进入
-        [self editDo];
-    }
     
     if (self.doneBlock) {
         // 创建进入
         [self creatDo];
+        [self addNoti];
     }
     
-    if (![self.switchBu isOn]) return;
+    if (self.dataDic) {
+        [self editDo];
+        // 编辑行进入
+        if (![self.dataDic[@"timeClick"] isEqualToString:labe.text]) {
+            [self addNoti];
+        }
+    }
+}
+
+- (void)addNoti
+{
+    if (!labe.text.length) return;
     
     NSString *formateStr = @"yyy-MM-dd  HH:mm";
     NSInteger timeSp =  [self timeSwitchTimestamp:labe.text andFormatter:formateStr];
     if (timeSp <= 0) return;
     
     // 加入消息提醒
-    [self addNotifacionWithDate:labe.text formater:formateStr time:timeSp];
-}
+    [self addNotifacionWithFormater:formateStr time:timeSp];
 
-- (void) editDo
+}
+- (void)editDo
 {
     if (self.textView.text.length > 0) {
         NSMutableArray *arr = [NSMutableArray arrayWithArray:[FileModel returnArr]];
         
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         dic[@"str"] = self.textView.text;
-        NSString *time;
+
+        // 记录时间
+        dic[@"time"] = [self strWithDate];
+        
+        // 提醒的数字
+        NSString *timeClick;
         if (labe.text.length > 0) {
-            time = labe.text;
+            timeClick = labe.text;
         } else {
-            time = [self strWithDate];
+            timeClick = @"";
         }
-        dic[@"time"] = time;
+        dic[@"timeClick"] = timeClick;
+        
         [arr removeObjectAtIndex:self.selectNum];
         [arr insertObject:dic atIndex:0];
         
@@ -259,13 +251,16 @@
         
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         dic[@"str"] = self.textView.text;
-        NSString *time;
+        dic[@"time"] = [self strWithDate];
+        // 提醒的数字
+        NSString *timeClick;
         if (labe.text.length > 0) {
-            time = labe.text;
+            timeClick = labe.text;
         } else {
-            time = [self strWithDate];
+            timeClick = @"";
         }
-        dic[@"time"] = time;
+ 
+        dic[@"timeClick"] = timeClick;
         [arr insertObject:dic atIndex:0];
         
         [FileModel writeArrWithArr:arr];
@@ -306,15 +301,14 @@
     labe.text = [dateForm stringFromDate:date];
 }
 
-- (void)addNotifacionWithDate:(NSString *)dateStr formater:(NSString *)formatestr time:(NSInteger)timeSp
+- (void)addNotifacionWithFormater:(NSString *)formatestr time:(NSInteger)timeSp
 {
     UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
     content.title = @"记录事项通知";
     content.body = self.textView.text;
-    content.badge  = @1;
-  NSInteger bag =  [[UIApplication sharedApplication] applicationIconBadgeNumber];
+    NSInteger bag =  [[UIApplication sharedApplication] applicationIconBadgeNumber];
     bag += 1;
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:bag];
+    content.badge  = @1;
     
     UNTimeIntervalNotificationTrigger *trigger;
         trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:timeSp repeats:NO];
@@ -362,7 +356,7 @@
 {
     if (!self.dataDic) return;
     self.textView.text = self.dataDic[@"str"];
-    labe.text = self.dataDic[@"time"];
+    labe.text = self.dataDic[@"timeClick"];
 }
 
 /**

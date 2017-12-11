@@ -20,12 +20,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x7b14;&#x8bb0;/EditViewController.m"
-            timestampString = "534096543.879363"
+            timestampString = "534694518.267688"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-rightAction"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "-addNotifacionWithFormater:time:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
